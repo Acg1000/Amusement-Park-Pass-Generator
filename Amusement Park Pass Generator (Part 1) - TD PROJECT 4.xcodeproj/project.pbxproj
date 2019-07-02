@@ -12,6 +12,14 @@
 		FB5DE4DC22C9718E00FDA803 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB5DE4DA22C9718E00FDA803 /* Main.storyboard */; };
 		FB5DE4DE22C9718F00FDA803 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5DE4DD22C9718F00FDA803 /* Assets.xcassets */; };
 		FB5DE4E122C9718F00FDA803 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB5DE4DF22C9718F00FDA803 /* LaunchScreen.storyboard */; };
+		FB5DE4E922C9720D00FDA803 /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4E822C9720D00FDA803 /* Guest.swift */; };
+		FB5DE4EB22C9721900FDA803 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4EA22C9721900FDA803 /* Employee.swift */; };
+		FB5DE4ED22C9722E00FDA803 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4EC22C9722E00FDA803 /* Manager.swift */; };
+		FB5DE4F122C97A3100FDA803 /* Areas.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F022C97A3100FDA803 /* Areas.swift */; };
+		FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F222C9C9E100FDA803 /* Swipe.swift */; };
+		FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F422CADDFB00FDA803 /* Errors.swift */; };
+		FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F622CAF90200FDA803 /* Person.swift */; };
+		FB5DE4F922CB096100FDA803 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F822CB096100FDA803 /* Create.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		FB5DE4DD22C9718F00FDA803 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB5DE4E022C9718F00FDA803 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB5DE4E222C9718F00FDA803 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB5DE4E822C9720D00FDA803 /* Guest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
+		FB5DE4EA22C9721900FDA803 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		FB5DE4EC22C9722E00FDA803 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		FB5DE4F022C97A3100FDA803 /* Areas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Areas.swift; sourceTree = "<group>"; };
+		FB5DE4F222C9C9E100FDA803 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
+		FB5DE4F422CADDFB00FDA803 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		FB5DE4F622CAF90200FDA803 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		FB5DE4F822CB096100FDA803 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +71,19 @@
 			isa = PBXGroup;
 			children = (
 				FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */,
+				FB5DE4F622CAF90200FDA803 /* Person.swift */,
 				FB5DE4D822C9718E00FDA803 /* ViewController.swift */,
 				FB5DE4DA22C9718E00FDA803 /* Main.storyboard */,
 				FB5DE4DD22C9718F00FDA803 /* Assets.xcassets */,
 				FB5DE4DF22C9718F00FDA803 /* LaunchScreen.storyboard */,
 				FB5DE4E222C9718F00FDA803 /* Info.plist */,
+				FB5DE4E822C9720D00FDA803 /* Guest.swift */,
+				FB5DE4EA22C9721900FDA803 /* Employee.swift */,
+				FB5DE4EC22C9722E00FDA803 /* Manager.swift */,
+				FB5DE4F022C97A3100FDA803 /* Areas.swift */,
+				FB5DE4F222C9C9E100FDA803 /* Swipe.swift */,
+				FB5DE4F422CADDFB00FDA803 /* Errors.swift */,
+				FB5DE4F822CB096100FDA803 /* Create.swift */,
 			);
 			path = "Amusement Park Pass Generator (Part 1) - TD PROJECT 4";
 			sourceTree = "<group>";
@@ -136,7 +160,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB5DE4D922C9718E00FDA803 /* ViewController.swift in Sources */,
+				FB5DE4EB22C9721900FDA803 /* Employee.swift in Sources */,
 				FB5DE4D722C9718E00FDA803 /* AppDelegate.swift in Sources */,
+				FB5DE4E922C9720D00FDA803 /* Guest.swift in Sources */,
+				FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */,
+				FB5DE4ED22C9722E00FDA803 /* Manager.swift in Sources */,
+				FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */,
+				FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */,
+				FB5DE4F922CB096100FDA803 /* Create.swift in Sources */,
+				FB5DE4F122C97A3100FDA803 /* Areas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

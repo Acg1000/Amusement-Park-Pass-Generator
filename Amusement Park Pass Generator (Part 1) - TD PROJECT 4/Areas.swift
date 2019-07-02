@@ -8,6 +8,7 @@
 
 import Foundation
 
+// the different areas around the park that different people can have access to
 enum Areas {
     case amusementAreas
     case kitchenAreas

@@ -44,7 +44,7 @@ class Manager: Person {
         return [.amusementAreas, .kitchenAreas, .maintenanceAreas, .officeAreas, .rideControlAreas]
     }
     
-    // every employee needs to get the same discount so probibly a static function
+    // every employee needs to get the same discount so a static function will do
     static var foodDiscount: Int = 25
     static var merchDiscount: Int = 25
     

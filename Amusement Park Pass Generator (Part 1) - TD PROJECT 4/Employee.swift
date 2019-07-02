@@ -50,7 +50,7 @@ class Employee: Person {
         }
     }
     
-    // every employee needs to get the same discount so probibly a static function
+    // every employee needs to get the same discount so probibly a static var
     static var foodDiscount: Int = 15
     static var merchDiscount: Int = 25
     

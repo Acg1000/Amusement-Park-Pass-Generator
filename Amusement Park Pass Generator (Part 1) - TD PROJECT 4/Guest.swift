@@ -15,21 +15,7 @@ class Guest: Person {
     var type: GuestType
     
     
-    // General init
-    init(firstName: String?, lastName: String?) throws {
-        guard let firstName = firstName else {
-            throw invalidInformationError.missingCredential(missing: "first name")
-        }
-        self.firstName = firstName
-
-        guard let lastName = lastName else {
-            throw invalidInformationError.missingCredential(missing: "last name")
-        }
-        self.lastName = lastName
-        
-        self.type = .classic
-    }
-    
+    // Init for Classic and VIPs
     init(firstName: String?, lastName: String?, isVIP: Bool) throws {
         guard let firstName = firstName else {
             throw invalidInformationError.missingCredential(missing: "first name")
@@ -65,7 +51,6 @@ class Guest: Person {
             self.age = age
         } else {
             throw invalidInformationError.invalidAge
-//            self.type = .classic
         }
     }
     
@@ -109,9 +94,6 @@ class Guest: Person {
             return DiscountSwipe(foodDiscount: 10, merchDiscount: 20)
         }
     }
-    // if the guest is a child, they must have a DOB
-    
-    // if the guest if a VIP, they can skip all rides, and have a 10% discount on food and a 20% discount on merch
 }
 
 enum GuestType {

@@ -15,10 +15,8 @@ class Create {
         do {
             if age != nil {
                 return try Guest(firstName: firstName, lastName: lastName, age: age)
-            } else if isVIP {
-                return try Guest(firstName: firstName, lastName: lastName, isVIP: isVIP)
             } else {
-                return try Guest(firstName: firstName, lastName: lastName)
+                return try Guest(firstName: firstName, lastName: lastName, isVIP: isVIP)
             }
                         
         } catch invalidInformationError.missingCredential(let missingCredentials) {

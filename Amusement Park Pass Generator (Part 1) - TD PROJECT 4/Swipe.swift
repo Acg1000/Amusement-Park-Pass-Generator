@@ -49,7 +49,10 @@ struct RideSwipe {
     var canSkip: Bool
 }
 
+// This provides specific implementation for seperate stations around the park
+
 class Swipe {
+    // for a swipe to get area access
     func area(user: Person, area: Areas) {
         let areaResults = user.areaSwipe()
         for areaItem in areaResults.areas {
@@ -61,6 +64,7 @@ class Swipe {
         print("Access Denied")
     }
     
+    // for a swipe to skip a line
     func ride(user: Person) {
         let rideResults = user.rideSwipe()
         if rideResults.canSkip {
@@ -70,6 +74,7 @@ class Swipe {
         }
     }
     
+    // a swipe in a store to provide a discount
     func discount(user: Person) {
         let discountResults = user.discountSwipe()
         if discountResults.foodDiscount > 0 {

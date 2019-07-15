@@ -11,4 +11,5 @@ import Foundation
 enum invalidInformationError: Error {
     case missingCredential(missing: String)
     case invalidAge
+    case invalidProjectNumber(projectNumber: Int)
 }

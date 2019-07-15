@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB516F7322DBC0A2007F94C4 /* Vendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB516F7222DBC0A2007F94C4 /* Vendor.swift */; };
+		FB516F7522DBE91B007F94C4 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB516F7422DBE91B007F94C4 /* Create.swift */; };
 		FB5DE4D722C9718E00FDA803 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */; };
 		FB5DE4D922C9718E00FDA803 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4D822C9718E00FDA803 /* ViewController.swift */; };
 		FB5DE4DC22C9718E00FDA803 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB5DE4DA22C9718E00FDA803 /* Main.storyboard */; };
@@ -19,10 +21,11 @@
 		FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F222C9C9E100FDA803 /* Swipe.swift */; };
 		FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F422CADDFB00FDA803 /* Errors.swift */; };
 		FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F622CAF90200FDA803 /* Person.swift */; };
-		FB5DE4F922CB096100FDA803 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F822CB096100FDA803 /* Create.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB516F7222DBC0A2007F94C4 /* Vendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor.swift; sourceTree = "<group>"; };
+		FB516F7422DBE91B007F94C4 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		FB5DE4D322C9718E00FDA803 /* Amusement Park Pass Generator (Part 1) - TD PROJECT 4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Amusement Park Pass Generator (Part 1) - TD PROJECT 4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5DE4D822C9718E00FDA803 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +40,6 @@
 		FB5DE4F222C9C9E100FDA803 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		FB5DE4F422CADDFB00FDA803 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		FB5DE4F622CAF90200FDA803 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		FB5DE4F822CB096100FDA803 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,10 +82,11 @@
 				FB5DE4E822C9720D00FDA803 /* Guest.swift */,
 				FB5DE4EA22C9721900FDA803 /* Employee.swift */,
 				FB5DE4EC22C9722E00FDA803 /* Manager.swift */,
+				FB516F7222DBC0A2007F94C4 /* Vendor.swift */,
 				FB5DE4F022C97A3100FDA803 /* Areas.swift */,
 				FB5DE4F222C9C9E100FDA803 /* Swipe.swift */,
 				FB5DE4F422CADDFB00FDA803 /* Errors.swift */,
-				FB5DE4F822CB096100FDA803 /* Create.swift */,
+				FB516F7422DBE91B007F94C4 /* Create.swift */,
 			);
 			path = "Amusement Park Pass Generator (Part 1) - TD PROJECT 4";
 			sourceTree = "<group>";
@@ -166,8 +169,9 @@
 				FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */,
 				FB5DE4ED22C9722E00FDA803 /* Manager.swift in Sources */,
 				FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */,
+				FB516F7522DBE91B007F94C4 /* Create.swift in Sources */,
+				FB516F7322DBC0A2007F94C4 /* Vendor.swift in Sources */,
 				FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */,
-				FB5DE4F922CB096100FDA803 /* Create.swift in Sources */,
 				FB5DE4F122C97A3100FDA803 /* Areas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,7 +5,6 @@
 //  Created by Andrew Graves on 7/1/19.
 //  Copyright © 2019 Andrew Graves. All rights reserved.
 //
-
 import Foundation
 
 class Create {
@@ -17,14 +16,14 @@ class Create {
         } else {
             return try Guest(firstName: firstName, lastName: lastName, isVIP: isVIP)
         }
-
+        
         
     }
     
-    func employee(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int, type: EmployeeType) throws -> Employee? {
+    func employee(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int, type: EmployeeType, projectNumber: Int?) throws -> Employee? {
         
-        return try Employee(firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, type: type)
-
+        return try Employee(firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, type: type, projectNumber: projectNumber)
+        
     }
     
     func manager(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int) throws -> Manager? {

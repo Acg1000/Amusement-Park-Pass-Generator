@@ -12,11 +12,16 @@ class Guest: Person {
     var firstName: String?
     var lastName: String?
     var age: Int?
+    var streetAddress: String?
+    var city: String?
+    var state: String?
+    var zipCode: Int?
     var type: GuestType
     
     
     // Init for Classic and VIPs
     init(firstName: String?, lastName: String?, isVIP: Bool) throws {
+        
         guard let firstName = firstName else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
@@ -34,8 +39,9 @@ class Guest: Person {
         }
     }
     
-    // Child init method
+    // Child and senior init method
     init(firstName: String?, lastName: String?, age: Int?) throws {
+        
         guard let firstName = firstName else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
@@ -46,12 +52,31 @@ class Guest: Person {
         }
         self.lastName = lastName
         
-        if let age = age, age <= 5 {
+        guard let age = age else {
+            throw invalidInformationError.invalidAge
+        }
+        
+        if age <= 5 {
             self.type = .freeChild
+            self.age = age
+        } else if age >= 60 {
+            self.type = .senior
             self.age = age
         } else {
             throw invalidInformationError.invalidAge
         }
+    }
+    
+    // Season Pass Guest
+    init(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int) {
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zipCode = zipCode
+        self.type = .seasonPass
     }
     
     
@@ -81,7 +106,7 @@ class Guest: Person {
         switch type {
         case .classic, .freeChild:
             return RideSwipe(canSkip: false)
-        case .vip:
+        case .vip, .seasonPass, .senior:
             return RideSwipe(canSkip: true)
         }
     }
@@ -90,8 +115,10 @@ class Guest: Person {
         switch type {
         case .classic, .freeChild:
             return DiscountSwipe(foodDiscount: 0, merchDiscount: 0)
-        case .vip:
+        case .vip, .seasonPass:
             return DiscountSwipe(foodDiscount: 10, merchDiscount: 20)
+        case .senior:
+            return DiscountSwipe(foodDiscount: 10, merchDiscount: 10)
         }
     }
 }
@@ -100,4 +127,6 @@ enum GuestType {
     case classic
     case vip
     case freeChild
+    case seasonPass
+    case senior
 }

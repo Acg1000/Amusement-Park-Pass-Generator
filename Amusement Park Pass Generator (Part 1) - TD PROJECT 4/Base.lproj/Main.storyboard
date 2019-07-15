@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="fbP-QM-66w">
             <objects>
-                <viewController id="hR4-pk-4nr" sceneMemberID="viewController">
+                <viewController id="hR4-pk-4nr" customClass="ViewController" customModule="Amusement_Park_Pass_Generator__Part_1____TD_PROJECT_4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gXO-Xd-Eja">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,6 +30,9 @@
                                                 <state key="normal" title="Guest">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="guestPressed:" destination="hR4-pk-4nr" eventType="touchUpInside" id="3Sl-I2-kcU"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmi-h2-9R3">
                                                 <rect key="frame" x="192" y="0.0" width="192" height="100"/>
@@ -37,6 +40,9 @@
                                                 <state key="normal" title="Employee">
                                                     <color key="titleColor" red="0.76862745098039209" green="0.71372549019607845" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="employeePressed:" destination="hR4-pk-4nr" eventType="touchUpInside" id="Arw-Vk-pQb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXB-M3-gEO">
                                                 <rect key="frame" x="384" y="0.0" width="192" height="100"/>
@@ -44,6 +50,9 @@
                                                 <state key="normal" title="Manager">
                                                     <color key="titleColor" red="0.76862745098039209" green="0.71372549019607845" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="managerPressed:" destination="hR4-pk-4nr" eventType="touchUpInside" id="FTe-NF-5ZR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alC-3j-mb2">
                                                 <rect key="frame" x="576" y="0.0" width="192" height="100"/>
@@ -51,6 +60,9 @@
                                                 <state key="normal" title="Vendor">
                                                     <color key="titleColor" red="0.76862745098039209" green="0.71372549019607845" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="vendorPressed:" destination="hR4-pk-4nr" eventType="touchUpInside" id="lJM-uG-6u4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -101,7 +113,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="xQ5-Ez-Br7"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -129,7 +141,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="nH4-1E-Igl"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -157,7 +169,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="JZo-6x-4qr"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -190,7 +202,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="3YD-9d-iQO"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -218,7 +230,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="LLl-ca-YLd"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -251,7 +263,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="eJf-nJ-skc"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -284,7 +296,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="y4y-Mk-Rxn"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -317,7 +329,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="Fpw-s6-Qjl"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -345,7 +357,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="dlO-9c-Ram"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -373,7 +385,7 @@
                                                             <constraint firstAttribute="height" constant="50" id="OHG-5w-s2d"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -398,6 +410,9 @@
                                                 <state key="normal" title="Generate Pass">
                                                     <color key="titleColor" red="0.93333333330000001" green="0.92549019610000005" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="generatePass:" destination="hR4-pk-4nr" eventType="touchUpInside" id="UZT-Mm-jwI"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggj-Gm-j0e">
                                                 <rect key="frame" x="416" y="32" width="320" height="77.5"/>
@@ -435,6 +450,25 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kSz-Hl-N9V"/>
                     </view>
+                    <connections>
+                        <outlet property="SSNField" destination="qRU-Oi-C7D" id="Zq5-1H-BI2"/>
+                        <outlet property="bottomStackView" destination="Ddu-qt-ZDz" id="D2c-Rr-oth"/>
+                        <outlet property="cityField" destination="awk-sq-kzG" id="kjp-JE-Qz5"/>
+                        <outlet property="companyField" destination="Czc-jW-bhH" id="cHd-Ic-yqj"/>
+                        <outlet property="dateOfBirthField" destination="C8i-40-GI4" id="8tA-fF-kg5"/>
+                        <outlet property="employeeButton" destination="wmi-h2-9R3" id="Jb4-rB-qjm"/>
+                        <outlet property="firstNameField" destination="8cz-kE-qDR" id="UBr-2I-cwb"/>
+                        <outlet property="generatePassButton" destination="YA9-3O-JKY" id="jOR-TW-jJX"/>
+                        <outlet property="guestButton" destination="qmt-U3-sZF" id="VjB-iT-AHt"/>
+                        <outlet property="lastNameField" destination="gvz-Bn-tFk" id="6nb-cX-Ufd"/>
+                        <outlet property="managerButton" destination="bXB-M3-gEO" id="NzW-rV-rws"/>
+                        <outlet property="populateDataButton" destination="ggj-Gm-j0e" id="aKH-PC-AhK"/>
+                        <outlet property="projectNumberField" destination="Fil-7C-jFx" id="Fka-0D-w5B"/>
+                        <outlet property="stateField" destination="Jqc-HZ-7Tu" id="dSD-9V-2tX"/>
+                        <outlet property="streetAddressField" destination="aXb-fx-0ds" id="sBn-Qe-fcR"/>
+                        <outlet property="vendorButton" destination="alC-3j-mb2" id="JoG-El-Lr2"/>
+                        <outlet property="zipCodeField" destination="hKm-Pl-z2L" id="FsD-aM-0dy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="88R-gE-H6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

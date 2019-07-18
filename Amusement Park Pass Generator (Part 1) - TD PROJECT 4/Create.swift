@@ -9,7 +9,7 @@ import Foundation
 
 class Create {
     
-    func guest(firstName: String?, lastName: String?, age: Int?, isVIP: Bool) throws -> Guest? {
+    func guest(firstName: String?, lastName: String?, age: Int, isVIP: Bool) throws -> Guest? {
         
         if age != nil {
             return try Guest(firstName: firstName, lastName: lastName, age: age)

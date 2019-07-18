@@ -550,19 +550,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cJ-T5-VZf">
                                         <rect key="frame" x="32" y="639" width="960" height="575"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Testing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCP-JB-Tn5">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Access Testing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCP-JB-Tn5">
                                                 <rect key="frame" x="370.5" y="0.0" width="219" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm the pass has the expected level of access when swiped at a kiosk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-PP-Zz2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Confirm the pass has the expected level of access when swiped at a kiosk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-PP-Zz2">
                                                 <rect key="frame" x="197.5" y="45" width="565" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtV-39-ToE">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Test Results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtV-39-ToE">
                                                 <rect key="frame" x="0.0" y="158.5" width="960" height="150"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -586,7 +586,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VoF-Ua-p0g">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VoF-Ua-p0g">
                                                 <rect key="frame" x="0.0" y="81.5" width="960" height="61"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKd-ZE-FnL">
@@ -631,7 +631,7 @@
                                             <constraint firstAttribute="bottom" secondItem="AhT-wJ-zgA" secondAttribute="bottom" id="hze-GP-tFn"/>
                                             <constraint firstItem="AhT-wJ-zgA" firstAttribute="centerX" secondItem="3cJ-T5-VZf" secondAttribute="centerX" id="nFV-Ea-FJn"/>
                                             <constraint firstAttribute="trailing" secondItem="gtV-39-ToE" secondAttribute="trailing" id="qWz-pS-QBf"/>
-                                            <constraint firstItem="AhT-wJ-zgA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gtV-39-ToE" secondAttribute="bottom" constant="32" id="rci-qe-Mxc"/>
+                                            <constraint firstItem="AhT-wJ-zgA" firstAttribute="top" secondItem="gtV-39-ToE" secondAttribute="bottom" constant="32" id="rci-qe-Mxc"/>
                                             <constraint firstItem="gtV-39-ToE" firstAttribute="top" secondItem="VoF-Ua-p0g" secondAttribute="bottom" constant="16" id="v5j-8H-mmK"/>
                                             <constraint firstAttribute="trailing" secondItem="VoF-Ua-p0g" secondAttribute="trailing" id="v5l-ht-Ooc"/>
                                             <constraint firstItem="VoF-Ua-p0g" firstAttribute="top" secondItem="8I0-PP-Zz2" secondAttribute="bottom" constant="16" id="xZJ-79-1HE"/>

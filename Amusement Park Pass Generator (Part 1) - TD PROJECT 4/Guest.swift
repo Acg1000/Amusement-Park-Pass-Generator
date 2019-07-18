@@ -53,7 +53,7 @@ class Guest: Person {
         self.lastName = lastName
         
         guard let age = age else {
-            throw invalidInformationError.invalidAge
+            throw invalidInformationError.missingCredential(missing: "age")
         }
         
         if age <= 5 {

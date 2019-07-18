@@ -64,6 +64,7 @@ class ViewController: UIViewController {
 //    let child = Guest(firstName: "Andrew", lastName: "Graves", age: 8, type: .freeChild)
     let swipe = Swipe()
     let create = Create()
+    let ageCalculator = AgeCalculator()
     
     // Top level buttons
     @IBOutlet weak var guestButton: UIButton!
@@ -99,7 +100,6 @@ class ViewController: UIViewController {
     
     var currentPrimaryButton = UIButton()
     var currentSecondaryButton = UIButton()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +108,7 @@ class ViewController: UIViewController {
         bottomStackView.addArrangedSubviews([button1, button2, button3, button4, button5])
         disableFields()
 
+        print(ageCalculator.calculateAgeFrom(birthDate: "08/07/2001"))
 
         // Do any additional setup after loading the view.
         var employee: Employee?
@@ -120,19 +121,19 @@ class ViewController: UIViewController {
 
         
         // A normal guest creation instance
-        do {
-            guest = try create.guest(firstName: "Andrew", lastName: "Graves", age: nil, isVIP: true)
-        } catch invalidInformationError.missingCredential(let missingInformation) {
-            print("Oops, looks like you forgot to input a \(missingInformation)")
-            // Pop up an alert dialog
-
-        } catch invalidInformationError.invalidAge {
-            print("You are too old to obtain a child pass!")
-            // Pop up an alert dialog
-            
-        } catch {
-            fatalError()
-        }
+//        do {
+//            guest = try create.guest(firstName: "Andrew", lastName: "Graves", age: nil, isVIP: true)
+//        } catch invalidInformationError.missingCredential(let missingInformation) {
+//            print("Oops, looks like you forgot to input a \(missingInformation)")
+//            // Pop up an alert dialog
+//
+//        } catch invalidInformationError.invalidAge {
+//            print("You are too old to obtain a child pass!")
+//            // Pop up an alert dialog
+//
+//        } catch {
+//            fatalError()
+//        }
         
         // Fails because a guest is created to have a child pass but it too old
         do {
@@ -248,6 +249,19 @@ class ViewController: UIViewController {
         zipCodeField.isEnabled = false
     }
     
+    
+    // MARK: Alert functions
+    func showAlert(title: String, with message: String?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    
     @objc func secondaryButtonClicked(_ sender: UIButton?) {
         guard let sender = sender else {
             fatalError()
@@ -300,7 +314,10 @@ class ViewController: UIViewController {
         default: print("error")
         }
     }
-    
+
+    //=========================================
+    // MARK: TOP BUTTON PRESSES
+    //=========================================
     
     @IBAction func guestPressed(_ sender: Any) {
         resetPrimaryButton(currentPrimaryButton)
@@ -367,7 +384,7 @@ class ViewController: UIViewController {
     
     @IBAction func vendorPressed(_ sender: Any) {
         resetPrimaryButton(currentPrimaryButton)
-        vendorButton.titleLabel?.font = employeeButton.titleLabel?.font.bold()
+        vendorButton.titleLabel?.font = vendorButton.titleLabel?.font.bold()
         vendorButton.setTitleColor(.white, for: .normal)
         
         for button in [button1, button2, button3, button4, button5] {
@@ -379,6 +396,10 @@ class ViewController: UIViewController {
         currentPrimaryButton = vendorButton
     }
     
+    //=========================================
+    // MARK: BOTTOM BUTTON PRESSES
+    //=========================================
+    
     @IBAction func generatePass(_ sender: Any) {
         // pass through all the relevent data depending on which top and bottomty button is selected
         
@@ -386,10 +407,30 @@ class ViewController: UIViewController {
         case button1:
             if currentPrimaryButton == guestButton {
                 //this is for child
-                print("child")
+                // If the following field is filled
+                do {
+                    print(firstNameField.text)
+                    print(lastNameField.text)
+                    print(dateOfBirthField.text)
+                    print(ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                    let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                    dump(person)
+
+                } catch invalidInformationError.invalidAge {
+                    showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
+                } catch let error {
+                    fatalError("\(error)")
+                }
+                
             } else if currentPrimaryButton == employeeButton {
                 // this is for food services
-                print("food services")
+                do {
+                    
+                    
+                    
+                } catch let error {
+                    fatalError("\(error)")
+                }
             }
         case button2:
             if currentPrimaryButton == guestButton {

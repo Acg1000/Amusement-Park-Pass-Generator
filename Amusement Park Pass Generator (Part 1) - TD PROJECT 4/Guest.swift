@@ -38,12 +38,15 @@ class Guest: Person {
     // Child and senior init method
     init(firstName: String?, lastName: String?, age: Int?) throws {
         
-        self.firstName = firstName
+        if firstName == "" && lastName != "" {
+            throw invalidInformationError.missingCredential(missing: "first name")
+        }
         
+        self.firstName = firstName
         self.lastName = lastName
         
         guard let age = age else {
-            throw invalidInformationError.missingCredential(missing: "age")
+            throw invalidInformationError.missingCredential(missing: "birthday")
         }
         
         if age <= 5 {
@@ -60,6 +63,7 @@ class Guest: Person {
     // Season Pass Guest
     init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?) throws {
         
+        // these guard statements just make sure that the user  didn't leave anything blank
         guard let firstName = firstName, firstName != "" else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
@@ -98,11 +102,7 @@ class Guest: Person {
         self.type = .seasonPass
     }
     
-    
-    var areas: [Areas] {
-        return [.amusementAreas]
-    }
-    
+    // returns the food discount that the user is entitled to
     var foodDiscount: Int? {
         switch type {
         case .vip: return 10
@@ -110,6 +110,7 @@ class Guest: Person {
         }
     }
     
+    // returns the merch discount that the user is entitled to
     var merchDiscount: Int? {
         switch type {
         case .vip: return 20
@@ -117,10 +118,12 @@ class Guest: Person {
         }
     }
     
+    // returns the areas the user can visit
     func areaSwipe() -> AreaSwipe {
         return AreaSwipe(areas: [.amusementAreas])
     }
     
+    // returns their ride skipping ability
     func rideSwipe() -> RideSwipe {
         switch type {
         case .classic, .freeChild:
@@ -130,6 +133,7 @@ class Guest: Person {
         }
     }
     
+    // returns the discounts their have access to
     func discountSwipe() -> DiscountSwipe {
         switch type {
         case .classic, .freeChild:
@@ -142,6 +146,7 @@ class Guest: Person {
     }
 }
 
+// the different guest types
 enum GuestType: String {
     case classic
     case vip

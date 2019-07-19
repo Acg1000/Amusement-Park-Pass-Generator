@@ -14,7 +14,7 @@ enum invalidInformationError: Error {
     case invalidProjectNumber(projectNumber: Int)
     case projectNumberIsNotInt
     case invalidZipCode
-    case invalidVendorCompany
+    case invalidVendorCompany(name: String?)
     case invalidDateOfBirth
     case invalidDateOfVisit
 }

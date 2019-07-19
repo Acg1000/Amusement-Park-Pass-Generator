@@ -27,7 +27,7 @@ class Vendor: Person {
         }
         
         guard let vendorCompanyString = vendorCompanyString, vendorCompanyString != "" else {
-            throw invalidInformationError.invalidVendorCompany
+            throw invalidInformationError.invalidVendorCompany(name: nil)
         }
         
         guard let dateOfBirth = dateOfBirth, dateOfBirth != "" else {
@@ -38,7 +38,11 @@ class Vendor: Person {
             throw invalidInformationError.invalidDateOfVisit
         }
         
-        self.vendorCompany = Vendors(rawValue: vendorCompanyString) ?? Vendors.acme
+        guard let vendorCompany = Vendors(rawValue: vendorCompanyString) else {
+            throw invalidInformationError.invalidVendorCompany(name: vendorCompanyString)
+        }
+        self.vendorCompany = vendorCompany
+        
         
         self.firstName = firstName
         self.lastName = lastName
@@ -72,8 +76,8 @@ class Vendor: Person {
 }
 
 enum Vendors: String {
-    case acme
-    case orkin
-    case fedex
-    case nwElectrical
+    case acme = "Acme"
+    case orkin = "Orkin"
+    case fedex = "Fedex"
+    case nwElectrical = "NW Electrical"
 }

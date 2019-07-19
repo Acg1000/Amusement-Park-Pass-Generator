@@ -8,19 +8,7 @@
 
 import UIKit
 
-enum Fields {
-    case dateOfBirth
-    case SSN
-    case projectNumber
-    case firstName
-    case lastName
-    case company
-    case streetAddress
-    case city
-    case state
-    case zipCode
-}
-
+// A nicer way for me to add and remove the buttons to and from the second bar
 extension UIStackView {
     func addArrangedSubviews(_ views: [UIView]) {
         for view in views {
@@ -35,6 +23,7 @@ extension UIStackView {
     }
 }
 
+// Makes it eaiser for me to modify fonts with bolding and other things
 extension UIFont {
     func withTraits(traits:UIFontDescriptor.SymbolicTraits) -> UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
@@ -61,9 +50,8 @@ extension UIFont {
 
 
 class ViewController: UIViewController {
-//    let child = Guest(firstName: "Andrew", lastName: "Graves", age: 8, type: .freeChild)
     let swipe = Swipe()
-    let ageCalculator = AgeCalculator()
+    let dateCalculator = DateCalculator()
     
     // Top level buttons
     @IBOutlet weak var guestButton: UIButton!
@@ -83,7 +71,7 @@ class ViewController: UIViewController {
     
     // Fields
     @IBOutlet weak var dateOfBirthField: UITextField!
-    @IBOutlet weak var dateOfVisitField: UITextField!
+    @IBOutlet weak var SSNField: UITextField!
     @IBOutlet weak var projectNumberField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
@@ -97,8 +85,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var generatePassButton: UIButton!
     @IBOutlet weak var populateDataButton: UIButton!
     
+    // Vars that keep track of the last pressed button on the top and lower bars
     var currentPrimaryButton = UIButton()
     var currentSecondaryButton = UIButton()
+    var fieldsToAutofil = [Fields]()
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let person = generatePass()
@@ -110,14 +100,31 @@ class ViewController: UIViewController {
         passController.person = person
     }
     
+    // Required
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    // Required
+    init(fieldsToAutofil: [Fields]) {
+        self.fieldsToAutofil = fieldsToAutofil
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Adds rounded corners to the buttons
+        populateDataButton.layer.cornerRadius = 10
+        generatePassButton.layer.cornerRadius = 10
+        populateDataButton.clipsToBounds = true
+        generatePassButton.clipsToBounds = true
+        
+        // Some other setup things
         bottomStackView.alignment = .center
         setupSecondaryButtonAttributes(for: [button1, button2, button3, button4, button5])
         bottomStackView.addArrangedSubviews([button1, button2, button3, button4, button5])
         disableFields()
-
-        print(ageCalculator.calculateAgeFrom(birthDate: "08/07/2001"))
 
         // Do any additional setup after loading the view.
         var employee: Employee?
@@ -126,33 +133,23 @@ class ViewController: UIViewController {
         let guestFailure: Guest?
         var manager: Manager?
         
+        // Starts it off by pressing the guest button
         guestPressed("me")
-        
-
-        // Call all the swipe methods here
-        if let guest = guest {
-            guest.swipe()
-        }
-        
-        if let employee = employee {
-            employee.swipe()
-        }
-        
-        if let manager = manager {
-            manager.swipe()
-        }
     }
     
+    // Resets the attributes of the buttons in the first row when they lose focus
     func resetPrimaryButton(_ button: UIButton) {
         button.titleLabel?.font = button.titleLabel?.font.regularPrimary()
         button.setTitleColor(UIColor(red: 0.812, green: 0.761, blue: 0.875, alpha: 1.00), for: .normal)
     }
     
+    // Resets the attributes of the buttons in the second row when they lose focus
     func resetSecondaryButton(_ button: UIButton) {
         button.titleLabel?.font = button.titleLabel?.font.regularSecondary()
         button.setTitleColor(UIColor(red: 0.522, green: 0.494, blue: 0.561, alpha: 1.00), for: .normal)
     }
     
+    // assigns starting attributes to all the secondary buttons because they are created programatically
     func setupSecondaryButtonAttributes(for buttons: [UIButton]) {
         for button in buttons {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -162,12 +159,16 @@ class ViewController: UIViewController {
         }
     }
     
+    // Enables fields that it is passed along with wiping all fields that have values written to them
     func enableFields(for fields: [Fields]) {
         disableFields()
+        wipeAllFields()
+        
+        fieldsToAutofil = fields
         for field in fields {
             switch field {
             case .dateOfBirth: dateOfBirthField.isEnabled = true
-            case .SSN: dateOfVisitField.isEnabled = true
+            case .SSN: SSNField.isEnabled = true
             case .projectNumber: projectNumberField.isEnabled = true
             case .firstName: firstNameField.isEnabled = true
             case .lastName: lastNameField.isEnabled = true
@@ -180,9 +181,10 @@ class ViewController: UIViewController {
         }
     }
     
+    // Helper function, disables all the fields
     func disableFields() {
         dateOfBirthField.isEnabled = false
-        dateOfVisitField.isEnabled = false
+        SSNField.isEnabled = false
         projectNumberField.isEnabled = false
         firstNameField.isEnabled = false
         lastNameField.isEnabled = false
@@ -193,8 +195,21 @@ class ViewController: UIViewController {
         zipCodeField.isEnabled = false
     }
     
+    // Helper, removes all text
+    func wipeAllFields() {
+        dateOfBirthField.text = ""
+        SSNField.text = ""
+        projectNumberField.text = ""
+        firstNameField.text = ""
+        lastNameField.text = ""
+        streetAddressField.text = ""
+        companyField.text = ""
+        cityField.text = ""
+        stateField.text = ""
+        zipCodeField.text = ""
+    }
     
-    // MARK: Alert functions
+    // MARK: Alert function
     func showAlert(title: String, with message: String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -204,19 +219,25 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    //=========================================
+    // MARK: BUTTON CLICKS
+    //=========================================
     
-    
+    // When a button in the second row is clicked
     @objc func secondaryButtonClicked(_ sender: UIButton?) {
         guard let sender = sender else {
-            fatalError()
-            // do nothing
+            //  do nothing
+            return
         }
+        // modify the font to show that its the focus right now
         sender.titleLabel?.font = sender.titleLabel?.font.bold()
         sender.setTitleColor(.white, for: .normal)
         
+        // reset the old one
         resetSecondaryButton(currentSecondaryButton)
         currentSecondaryButton = sender
         
+        // Switch on the sender (which represents one of the 5 seconday buttons)
         switch sender {
         case button1:
             if currentPrimaryButton == guestButton {
@@ -244,7 +265,7 @@ class ViewController: UIViewController {
             } else if currentPrimaryButton == employeeButton {
                 // this is for contract workers
                 print("contract")
-                enableFields(for: [.firstName, .lastName, .streetAddress, .city, .state, .zipCode])
+                enableFields(for: [.firstName, .lastName, .streetAddress, .city, .state, .zipCode, .projectNumber])
             }
         case button5:
             if currentPrimaryButton == guestButton {
@@ -253,7 +274,7 @@ class ViewController: UIViewController {
                 enableFields(for: [.firstName, .lastName, .streetAddress, .city, .state, .zipCode])
             } else if currentPrimaryButton == employeeButton {
                 // this is an error and should return an error
-                print("error")
+                print("this should never happen")
             }
         default: print("error")
         }
@@ -263,31 +284,38 @@ class ViewController: UIViewController {
     // MARK: TOP BUTTON PRESSES
     //=========================================
     
+    // When the guest button is pressed
     @IBAction func guestPressed(_ sender: Any) {
         resetPrimaryButton(currentPrimaryButton)
         
+        // set the attributes
         guestButton.titleLabel?.font = guestButton.titleLabel?.font.bold()
         guestButton.setTitleColor(.white, for: .normal)
         
+        // add the 5th button
         if !bottomStackView.arrangedSubviews.contains(button5) {
             bottomStackView.addArrangedSubview(button5)
             button5.isHidden = false
 
         }
         
+        // unhide all the other buttons
         for button in [button1, button2, button3, button4] {
             button.isHidden = false
         }
         
+        // set the text for each button
         button1.setTitle("Child", for: .normal)
         button2.setTitle("Adult", for: .normal)
         button3.setTitle("Senior", for: .normal)
         button4.setTitle("VIP", for: .normal)
         button5.setTitle("Season Pass", for: .normal)
 
+        // set the current button to this one
         currentPrimaryButton = guestButton
     }
     
+    // When the employee button is pressed (REFER TO GUEST FOR LABELS)
     @IBAction func employeePressed(_ sender: Any) {
         resetPrimaryButton(currentPrimaryButton)
         employeeButton.titleLabel?.font = employeeButton.titleLabel?.font.bold()
@@ -307,20 +335,24 @@ class ViewController: UIViewController {
         button3.setTitle("Maintenance", for: .normal)
         button4.setTitle("Contract", for: .normal)
         
+        // enable the nessicary fields
         enableFields(for: [.firstName, .lastName, .city, .state, .streetAddress, .zipCode])
         
         currentPrimaryButton = employeeButton
     }
     
     @IBAction func managerPressed(_ sender: Any) {
+        // assigning attributes
         resetPrimaryButton(currentPrimaryButton)
         managerButton.titleLabel?.font = managerButton.titleLabel?.font.bold()
         managerButton.setTitleColor(.white, for: .normal)
         
+        // hide all buttons
         for button in [button1, button2, button3, button4, button5] {
             button.isHidden = true
         }
         
+        // enable the fields needed for input
         enableFields(for: [.firstName, .lastName, .city, .state, .streetAddress, .zipCode])
         
         currentPrimaryButton = managerButton
@@ -344,14 +376,21 @@ class ViewController: UIViewController {
     // MARK: BOTTOM BUTTON PRESSES
     //=========================================
     
+    // The HUGE pass generating function...
     func generatePass() -> Person? {
+        
         // pass through all the relevent data depending on which top and bottomty button is selected
+        
+        // if the current primary button is the manager button...
         if currentPrimaryButton == managerButton {
             do {
+                // Create the manager
                 let person = try Manager(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField.text)
                 
+                // return the manager
                 return person
                 
+                // ERROR CATCHING
             } catch invalidInformationError.invalidZipCode {
                 showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
             } catch invalidInformationError.missingCredential(let missingCreds) {
@@ -360,13 +399,17 @@ class ViewController: UIViewController {
                 fatalError("\(error)")
             }
             
+            // If its a vendor
         } else if currentPrimaryButton == vendorButton {
             
             do {
-                let person = try Vendor(firstName: firstNameField.text, lastName: lastNameField.text, vendorCompanyString: companyField.text, dateOfBirth: dateOfBirthField.text, dateOfVisit: dateOfVisitField.text)
+                // create the vendor
+                let person = try Vendor(firstName: firstNameField.text, lastName: lastNameField.text, vendorCompanyString: companyField.text, dateOfBirth: dateOfBirthField.text, dateOfVisit: dateCalculator.currentDate())
                 
+                // return the vendor
                 return person
                 
+                // ERROR CATCHING
             } catch invalidInformationError.invalidDateOfBirth {
                 showAlert(title: "Invalid Date Of Birth", with: "Please enter a valid DOB")
             } catch invalidInformationError.invalidDateOfVisit {
@@ -375,30 +418,40 @@ class ViewController: UIViewController {
                 showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
             } catch invalidInformationError.missingCredential(let missingCreds) {
                 showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+            } catch invalidInformationError.invalidVendorCompany(let name) {
+                if let name = name {
+                    showAlert(title: "Invalid Vendor Company", with: "\(name) is an invalid vendor company. Please enter a valid one")
+                } else {
+                    showAlert(title: "Missing Vendor Company", with: "Please enter a vendor company")
+                }
+                
             } catch let error {
                 fatalError("\(error)")
             }
             
         } else {
+            // for the other kinds of people we switch on the secondar button type...
             switch currentSecondaryButton {
             case button1:
+                // if its for the first button and the primary button is the guest one...
                 if currentPrimaryButton == guestButton {
-                    //this is for child
-                    // If the following field is filled
                     do {
-                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                        // Create a child
+                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: dateCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
                         
+                        // return the child
                         return person
                         
                     } catch invalidInformationError.invalidAge {
                         showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
+                    } catch invalidInformationError.missingCredential(let missing) {
+                        showAlert(title: "Missing First Name", with: "Please either enter a valid \(missing)")
                     } catch let error {
                         fatalError("\(error)")
                     }
                     
                 } else if currentPrimaryButton == employeeButton {
                     // this is for food services
-                    
                     
                     do {
                         let person = try Employee(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField?.text, type: .food)
@@ -416,6 +469,7 @@ class ViewController: UIViewController {
                     }
                 }
                 
+                // The same process goes for every single one of the 5 buttons
             case button2:
                 if currentPrimaryButton == guestButton {
                     //this is for adult
@@ -447,12 +501,12 @@ class ViewController: UIViewController {
                 if currentPrimaryButton == guestButton {
                     //this is for senior
                     do {
-                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: dateCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
                         
                         return person
                         
                     } catch invalidInformationError.invalidAge {
-                        showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
+                        showAlert(title: "Invalid Age", with: "You are too young to obtain the senior pass...")
                     } catch let error {
                         fatalError("\(error)")
                     }
@@ -527,10 +581,47 @@ class ViewController: UIViewController {
                     print("error")
                 }
             default:
+                // If nothing is selected then an alert tells you to select a seconday button
                 showAlert(title: "Select a Type", with: "Please select a type on the top bar to continue")
             }
         }
         return nil
+    }
+    
+    // Fills the needed data in to satisfy the creation requirements
+    @IBAction func populateDataPressed(_ sender: Any) {
+        for field in fieldsToAutofil {
+            switch field {
+            case .firstName:
+                firstNameField.text = "Julio"
+            case .lastName:
+                lastNameField.text = "Smith"
+            case .dateOfBirth:
+                if currentPrimaryButton == guestButton && currentSecondaryButton == button1 {
+                    dateOfBirthField.text = "08/19/2018"
+
+                } else if currentPrimaryButton == guestButton && currentSecondaryButton == button3 {
+                    dateOfBirthField.text = "08/19/1940"
+                } else {
+                    dateOfBirthField.text = "08/19/2000"
+                }
+                
+            case .SSN:
+                print("SSN")
+            case .city:
+                cityField.text = "Lakeview"
+            case .state:
+                stateField.text = "California"
+            case .zipCode:
+                zipCodeField.text = "99999"
+            case .company:
+                companyField.text = "Acme"
+            case .projectNumber:
+                projectNumberField.text = "1001"
+            case .streetAddress:
+                streetAddressField.text = "123 Ridgecrest Dr."
+            }
+        }
     }
 }
 

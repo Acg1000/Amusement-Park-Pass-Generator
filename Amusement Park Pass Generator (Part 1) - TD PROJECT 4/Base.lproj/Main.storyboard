@@ -129,13 +129,13 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YcH-Hu-KgT">
                                                 <rect key="frame" x="256" y="0.0" width="256" height="141.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Of Visit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiI-Jb-l9B">
-                                                        <rect key="frame" x="24" y="24" width="130" height="35.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SSN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiI-Jb-l9B">
+                                                        <rect key="frame" x="24" y="24" width="46.5" height="35.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM / DD / YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-Oi-C7D">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="###-##-####" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-Oi-C7D">
                                                         <rect key="frame" x="24" y="75.5" width="208" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="nH4-1E-Igl"/>
@@ -421,6 +421,9 @@
                                                 <state key="normal" title="Populate Data">
                                                     <color key="titleColor" red="0.43648287650000001" green="0.57272285219999997" blue="0.56078565120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="populateDataPressed:" destination="hR4-pk-4nr" eventType="touchUpInside" id="Igl-8f-ErW"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -451,11 +454,11 @@
                         <viewLayoutGuide key="safeArea" id="kSz-Hl-N9V"/>
                     </view>
                     <connections>
+                        <outlet property="SSNField" destination="qRU-Oi-C7D" id="Zq5-1H-BI2"/>
                         <outlet property="bottomStackView" destination="Ddu-qt-ZDz" id="D2c-Rr-oth"/>
                         <outlet property="cityField" destination="awk-sq-kzG" id="kjp-JE-Qz5"/>
                         <outlet property="companyField" destination="Czc-jW-bhH" id="cHd-Ic-yqj"/>
                         <outlet property="dateOfBirthField" destination="C8i-40-GI4" id="8tA-fF-kg5"/>
-                        <outlet property="dateOfVisitField" destination="qRU-Oi-C7D" id="Zq5-1H-BI2"/>
                         <outlet property="employeeButton" destination="wmi-h2-9R3" id="Jb4-rB-qjm"/>
                         <outlet property="firstNameField" destination="8cz-kE-qDR" id="UBr-2I-cwb"/>
                         <outlet property="generatePassButton" destination="YA9-3O-JKY" id="jOR-TW-jJX"/>
@@ -482,14 +485,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2B-hc-H7F">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Pass" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2B-hc-H7F">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="100"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.57647058819999997" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="0Us-zy-Hsw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="0Y3-Br-iOx">
@@ -589,6 +592,9 @@
                                                 <state key="normal" title="Create New Pass">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="createNewPassPressed:" destination="04C-AR-p7q" eventType="touchUpInside" id="5bE-DC-m0d"/>
+                                                </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VoF-Ua-p0g">
                                                 <rect key="frame" x="0.0" y="78" width="704" height="61"/>
@@ -675,8 +681,10 @@
                         <outlet property="attributeLabel1" destination="oFl-Ej-Dpd" id="HAX-IB-wda"/>
                         <outlet property="attributeLabel2" destination="Nio-ca-X4N" id="0g5-GM-n3Y"/>
                         <outlet property="attributeLabel3" destination="xJc-gq-dzD" id="GqA-3c-TFp"/>
+                        <outlet property="createNewPassButton" destination="AhT-wJ-zgA" id="HND-Yd-yF2"/>
                         <outlet property="discountAccessButton" destination="Q8j-6W-tMF" id="Ynu-2F-EYS"/>
                         <outlet property="passTypeLabel" destination="207-ac-TF5" id="CPP-vs-Zgr"/>
+                        <outlet property="personCardBackground" destination="bSs-HX-QQP" id="1IG-c3-XeK"/>
                         <outlet property="personNameLabel" destination="Zs3-qz-9Lw" id="5So-5W-phS"/>
                         <outlet property="rideAccessButton" destination="iv5-uF-p2Z" id="wXA-2e-cXU"/>
                         <outlet property="testResultsLabel" destination="gtV-39-ToE" id="NQp-FW-JY9"/>

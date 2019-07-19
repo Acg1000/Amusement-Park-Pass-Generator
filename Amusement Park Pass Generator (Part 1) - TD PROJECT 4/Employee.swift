@@ -21,8 +21,10 @@ class Employee: Person {
     }
     var projectNumber: Int?
     
+    // Init for the majority of employees
     init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, type: EmployeeType) throws {
         
+        // More of those funkey guard statements
         guard let firstName = firstName, firstName != "" else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
@@ -60,6 +62,7 @@ class Employee: Person {
         self.type = type
     }
     
+    // init for contract workers
     init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, type: EmployeeType, projectNumber: String?) throws {
         
         guard let firstName = firstName, firstName != "" else {
@@ -112,16 +115,6 @@ class Employee: Person {
             throw invalidInformationError.invalidProjectNumber(projectNumber: modifiedProjectNumber)
         }
     }
-    
-    // approperate types need to access their designated areas
-//    var areas: [Areas] {
-//        switch type {
-//        case .food, .contract: return [.amusementAreas, .kitchenAreas]
-//        case .ride: return [.amusementAreas, .rideControlAreas]
-//        case .maintenance: return [.amusementAreas, .kitchenAreas, .rideControlAreas, .maintenanceAreas]
-//        }
-//    }
-    
     
     func areaSwipe() -> AreaSwipe {
         switch type {

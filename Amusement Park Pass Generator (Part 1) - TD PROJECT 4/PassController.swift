@@ -24,24 +24,66 @@ class PassController: UIViewController {
     @IBOutlet weak var areaAccessButton: UIButton!
     @IBOutlet weak var rideAccessButton: UIButton!
     @IBOutlet weak var discountAccessButton: UIButton!
+    @IBOutlet weak var createNewPassButton: UIButton!
+    
+    // etc
+    @IBOutlet weak var personCardBackground: UIView!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Rounds all the corners to the buttons and boxes
+        areaAccessButton.layer.cornerRadius = 10
+        areaAccessButton.clipsToBounds = true
+        rideAccessButton.layer.cornerRadius = 10
+        rideAccessButton.clipsToBounds = true
+        discountAccessButton.layer.cornerRadius = 10
+        discountAccessButton.clipsToBounds = true
+        testResultsLabel.layer.cornerRadius = 20
+        testResultsLabel.clipsToBounds = true
+        createNewPassButton.layer.cornerRadius = 10
+        createNewPassButton.clipsToBounds = true
+        personCardBackground.layer.cornerRadius = 20
+        personCardBackground.clipsToBounds = true
+        
+        // makes sure that the person var and others are created and not nil
         guard let person = person, let firstName = person.firstName, let lastName = person.lastName else {
             return
         }
-        personNameLabel.text = "\(firstName)  \(lastName)"
-
         
+        // if the first name is empty that means they didn't want to add their name so its just registered as a Park  Attendee
+        if firstName.isEmpty {
+            personNameLabel.text = "Park Attendee"
+        } else {
+            // if not then it puts their name
+            personNameLabel.text = "\(firstName)  \(lastName)"
+        }
+        
+        // checks to see if the person has a type
         guard let personType = person.personType else {
             fatalError("no person type")
         }
         
-        
+        // add the type to a label
         passTypeLabel.text = "\(personType) Pass".uppercased()
+        
+        // add their line skipping ability to the card
+        let canSkip = person.rideSwipe().canSkip
+        if canSkip {
+            attributeLabel1.text = "Can skip rides"
+        } else {
+            attributeLabel1.text = "Can't skip rides"
+        }
+        
+        // and add their merch discounts
+        let foodDiscount = person.discountSwipe().foodDiscount
+        let merchDiscount = person.discountSwipe().merchDiscount
+        
+        attributeLabel2.text = "\(foodDiscount)% off food items."
+        attributeLabel3.text = "\(merchDiscount)% off merch items"
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,19 +95,20 @@ class PassController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    // Helper, resets the label at the bottom
     func resetTestResultsLabel() {
         testResultsLabel.text = ""
         testResultsLabel.backgroundColor = UIColor(red: 0.792, green: 0.776, blue: 0.808, alpha: 1.00)
 
     }
     
-    
+    // Tests their area access and then changes the label to reflect it
     @IBAction func areaAccessButton(_ sender: Any) {
         resetTestResultsLabel()
         
         let areaSwipe = person?.areaSwipe()
         guard let areas = areaSwipe?.areas else {
-            // an actual error please
+            // this will never happen
             fatalError()
         }
         
@@ -75,6 +118,7 @@ class PassController: UIViewController {
         }
     }
     
+    // Tests their ride access and then changes the label to reflect it
     @IBAction func rideAccessButton(_ sender: Any) {
         resetTestResultsLabel()
         
@@ -88,17 +132,24 @@ class PassController: UIViewController {
         testResultsLabel.text = "CAN NOT SKIP"
         
     }
+    
+    // Tests their discount access and then changes the label to reflect it
     @IBAction func discountAccess(_ sender: Any) {
         resetTestResultsLabel()
         
         let discountSwipe = person?.discountSwipe()
         if let foodDiscount: Int = discountSwipe?.foodDiscount {
-            testResultsLabel.text?.append("Food Discount: $\(foodDiscount) \n")
+            testResultsLabel.text?.append("Food Discount: \(foodDiscount)% \n")
 
         }
         if let merchDiscount: Int = discountSwipe?.merchDiscount {
-            testResultsLabel.text?.append("Merch Discount: $\(merchDiscount) \n")
+            testResultsLabel.text?.append("Merch Discount: \(merchDiscount)% \n")
 
         }
+    }
+    
+    // dismisses the view and goes back the main menu
+    @IBAction func createNewPassPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

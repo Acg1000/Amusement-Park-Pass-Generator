@@ -9,22 +9,43 @@
 import Foundation
 
 class Vendor: Person {
-   
-    
-    var firstName: String
-    var lastName: String
+    var firstName: String?
+    var lastName: String?
     var vendorCompany: Vendors
     var dateOfBirth: String
     var dateOfVisit: String
+    let personType: PersonType? = PersonType.vendor
     
-    init(firstName: String, lastName: String, vendorCompany: Vendors, dateOfBirth: String, dateOfVisit: String) throws {
+    init(firstName: String?, lastName: String?, vendorCompanyString: String?, dateOfBirth: String?, dateOfVisit: String?) throws {
         
-            self.firstName = firstName
-            self.lastName = lastName
-            self.vendorCompany = vendorCompany
-            self.dateOfBirth = dateOfBirth
-            self.dateOfVisit = dateOfVisit
+        guard let firstName = firstName, firstName != "" else {
+            throw invalidInformationError.missingCredential(missing: "first name")
         }
+        
+        guard let lastName = lastName, lastName != "" else {
+            throw invalidInformationError.missingCredential(missing: "last name")
+        }
+        
+        guard let vendorCompanyString = vendorCompanyString, vendorCompanyString != "" else {
+            throw invalidInformationError.invalidVendorCompany
+        }
+        
+        guard let dateOfBirth = dateOfBirth, dateOfBirth != "" else {
+            throw invalidInformationError.invalidDateOfBirth
+        }
+        
+        guard let dateOfVisit = dateOfVisit, dateOfVisit != ""  else {
+            throw invalidInformationError.invalidDateOfVisit
+        }
+        
+        self.vendorCompany = Vendors(rawValue: vendorCompanyString) ?? Vendors.acme
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.dateOfBirth = dateOfBirth
+        self.dateOfVisit = dateOfVisit
+        
+    }
     
     
     func areaSwipe() -> AreaSwipe {

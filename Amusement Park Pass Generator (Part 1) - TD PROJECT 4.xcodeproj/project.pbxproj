@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FB380D3C22DE6F9D001A2778 /* AgeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB380D3B22DE6F9D001A2778 /* AgeCalculator.swift */; };
 		FB516F7322DBC0A2007F94C4 /* Vendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB516F7222DBC0A2007F94C4 /* Vendor.swift */; };
-		FB516F7522DBE91B007F94C4 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB516F7422DBE91B007F94C4 /* Create.swift */; };
 		FB5DE4D722C9718E00FDA803 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */; };
 		FB5DE4D922C9718E00FDA803 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4D822C9718E00FDA803 /* ViewController.swift */; };
 		FB5DE4DC22C9718E00FDA803 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB5DE4DA22C9718E00FDA803 /* Main.storyboard */; };
@@ -22,12 +21,13 @@
 		FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F222C9C9E100FDA803 /* Swipe.swift */; };
 		FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F422CADDFB00FDA803 /* Errors.swift */; };
 		FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5DE4F622CAF90200FDA803 /* Person.swift */; };
+		FBF06A5E22E1097B00E45967 /* PassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF06A5D22E1097B00E45967 /* PassController.swift */; };
+		FBF06A6022E223E900E45967 /* DateForPopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF06A5F22E223E900E45967 /* DateForPopulation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FB380D3B22DE6F9D001A2778 /* AgeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeCalculator.swift; sourceTree = "<group>"; };
 		FB516F7222DBC0A2007F94C4 /* Vendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor.swift; sourceTree = "<group>"; };
-		FB516F7422DBE91B007F94C4 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		FB5DE4D322C9718E00FDA803 /* Amusement Park Pass Generator (Part 1) - TD PROJECT 4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Amusement Park Pass Generator (Part 1) - TD PROJECT 4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5DE4D822C9718E00FDA803 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +42,8 @@
 		FB5DE4F222C9C9E100FDA803 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		FB5DE4F422CADDFB00FDA803 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		FB5DE4F622CAF90200FDA803 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		FBF06A5D22E1097B00E45967 /* PassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassController.swift; sourceTree = "<group>"; };
+		FBF06A5F22E223E900E45967 /* DateForPopulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateForPopulation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,12 +77,13 @@
 			isa = PBXGroup;
 			children = (
 				FB5DE4D622C9718E00FDA803 /* AppDelegate.swift */,
-				FB5DE4F622CAF90200FDA803 /* Person.swift */,
 				FB5DE4D822C9718E00FDA803 /* ViewController.swift */,
+				FBF06A5D22E1097B00E45967 /* PassController.swift */,
 				FB5DE4DA22C9718E00FDA803 /* Main.storyboard */,
 				FB5DE4DD22C9718F00FDA803 /* Assets.xcassets */,
 				FB5DE4DF22C9718F00FDA803 /* LaunchScreen.storyboard */,
 				FB5DE4E222C9718F00FDA803 /* Info.plist */,
+				FB5DE4F622CAF90200FDA803 /* Person.swift */,
 				FB5DE4E822C9720D00FDA803 /* Guest.swift */,
 				FB5DE4EA22C9721900FDA803 /* Employee.swift */,
 				FB5DE4EC22C9722E00FDA803 /* Manager.swift */,
@@ -88,8 +91,8 @@
 				FB5DE4F022C97A3100FDA803 /* Areas.swift */,
 				FB5DE4F222C9C9E100FDA803 /* Swipe.swift */,
 				FB5DE4F422CADDFB00FDA803 /* Errors.swift */,
-				FB516F7422DBE91B007F94C4 /* Create.swift */,
 				FB380D3B22DE6F9D001A2778 /* AgeCalculator.swift */,
+				FBF06A5F22E223E900E45967 /* DateForPopulation.swift */,
 			);
 			path = "Amusement Park Pass Generator (Part 1) - TD PROJECT 4";
 			sourceTree = "<group>";
@@ -171,9 +174,10 @@
 				FB5DE4D722C9718E00FDA803 /* AppDelegate.swift in Sources */,
 				FB5DE4E922C9720D00FDA803 /* Guest.swift in Sources */,
 				FB5DE4F522CADDFB00FDA803 /* Errors.swift in Sources */,
+				FBF06A6022E223E900E45967 /* DateForPopulation.swift in Sources */,
 				FB5DE4ED22C9722E00FDA803 /* Manager.swift in Sources */,
 				FB5DE4F722CAF90200FDA803 /* Person.swift in Sources */,
-				FB516F7522DBE91B007F94C4 /* Create.swift in Sources */,
+				FBF06A5E22E1097B00E45967 /* PassController.swift in Sources */,
 				FB516F7322DBC0A2007F94C4 /* Vendor.swift in Sources */,
 				FB5DE4F322C9C9E100FDA803 /* Swipe.swift in Sources */,
 				FB5DE4F122C97A3100FDA803 /* Areas.swift in Sources */,

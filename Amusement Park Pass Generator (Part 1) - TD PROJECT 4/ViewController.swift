@@ -63,7 +63,6 @@ extension UIFont {
 class ViewController: UIViewController {
 //    let child = Guest(firstName: "Andrew", lastName: "Graves", age: 8, type: .freeChild)
     let swipe = Swipe()
-    let create = Create()
     let ageCalculator = AgeCalculator()
     
     // Top level buttons
@@ -84,7 +83,7 @@ class ViewController: UIViewController {
     
     // Fields
     @IBOutlet weak var dateOfBirthField: UITextField!
-    @IBOutlet weak var SSNField: UITextField!
+    @IBOutlet weak var dateOfVisitField: UITextField!
     @IBOutlet weak var projectNumberField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
@@ -101,6 +100,16 @@ class ViewController: UIViewController {
     var currentPrimaryButton = UIButton()
     var currentSecondaryButton = UIButton()
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let person = generatePass()
+        
+        guard let passController = segue.destination as? PassController else {
+            return
+        }
+        
+        passController.person = person
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bottomStackView.alignment = .center
@@ -118,70 +127,6 @@ class ViewController: UIViewController {
         var manager: Manager?
         
         guestPressed("me")
-
-        
-        // A normal guest creation instance
-//        do {
-//            guest = try create.guest(firstName: "Andrew", lastName: "Graves", age: nil, isVIP: true)
-//        } catch invalidInformationError.missingCredential(let missingInformation) {
-//            print("Oops, looks like you forgot to input a \(missingInformation)")
-//            // Pop up an alert dialog
-//
-//        } catch invalidInformationError.invalidAge {
-//            print("You are too old to obtain a child pass!")
-//            // Pop up an alert dialog
-//
-//        } catch {
-//            fatalError()
-//        }
-        
-        // Fails because a guest is created to have a child pass but it too old
-        do {
-            guestFailure = try create.guest(firstName: "Andrew", lastName: "Graves", age: 8, isVIP: false)
-        } catch invalidInformationError.missingCredential(let missingInformation) {
-            print("Oops, looks like you forgot to input a \(missingInformation)")
-            // Pop up an alert dialog
-            
-        } catch invalidInformationError.invalidAge {
-            print("You are too old to obtain a child pass!")
-            // Pop up an alert dialog
-            
-        } catch {
-            fatalError()
-        }
-        
-        
-        // Normal employee pass
-        do {
-            employee = try create.employee(firstName: "Andrew", lastName: "Graves", streetAddress: "123 fake drive", city: "Fake Valley", state: "California", zipCode: 111111, type: .maintenance, projectNumber: nil)
-        } catch invalidInformationError.missingCredential(let missingInformation) {
-            print("Oops, looks like you forgot to input a \(missingInformation)")
-            // Pop up an alert dialog
-        } catch {
-            fatalError()
-        }
-        
-        
-        // Fails because a street address is missing
-        do {
-            employeeFailure = try create.employee(firstName: "Andrew", lastName: "Graves", streetAddress: "", city: "Fake Valley", state: "California", zipCode: 111111, type: .maintenance, projectNumber: nil)
-        } catch invalidInformationError.missingCredential(let missingInformation) {
-            print("Oops, looks like you forgot to input a \(missingInformation)")
-            // Pop up an alert dialog
-        } catch {
-            fatalError()
-        }
-        
-        
-        // Regular manager creation
-        do {
-            manager = try create.manager(firstName: "Andrew", lastName: "Graves", streetAddress: "123 fake drive", city: "Fake Valley", state: "California", zipCode: 111111)
-        } catch invalidInformationError.missingCredential(let missingInformation) {
-            print("Oops, looks like you forgot to input a \(missingInformation)")
-            // Pop up an alert dialog
-        } catch {
-            fatalError()
-        }
         
 
         // Call all the swipe methods here
@@ -196,7 +141,6 @@ class ViewController: UIViewController {
         if let manager = manager {
             manager.swipe()
         }
-        
     }
     
     func resetPrimaryButton(_ button: UIButton) {
@@ -223,7 +167,7 @@ class ViewController: UIViewController {
         for field in fields {
             switch field {
             case .dateOfBirth: dateOfBirthField.isEnabled = true
-            case .SSN: SSNField.isEnabled = true
+            case .SSN: dateOfVisitField.isEnabled = true
             case .projectNumber: projectNumberField.isEnabled = true
             case .firstName: firstNameField.isEnabled = true
             case .lastName: lastNameField.isEnabled = true
@@ -238,7 +182,7 @@ class ViewController: UIViewController {
     
     func disableFields() {
         dateOfBirthField.isEnabled = false
-        SSNField.isEnabled = false
+        dateOfVisitField.isEnabled = false
         projectNumberField.isEnabled = false
         firstNameField.isEnabled = false
         lastNameField.isEnabled = false
@@ -400,74 +344,193 @@ class ViewController: UIViewController {
     // MARK: BOTTOM BUTTON PRESSES
     //=========================================
     
-    @IBAction func generatePass(_ sender: Any) {
+    func generatePass() -> Person? {
         // pass through all the relevent data depending on which top and bottomty button is selected
-        
-        switch currentSecondaryButton {
-        case button1:
-            if currentPrimaryButton == guestButton {
-                //this is for child
-                // If the following field is filled
-                do {
-                    print(firstNameField.text)
-                    print(lastNameField.text)
-                    print(dateOfBirthField.text)
-                    print(ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
-                    let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
-                    dump(person)
-
-                } catch invalidInformationError.invalidAge {
-                    showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
-                } catch let error {
-                    fatalError("\(error)")
-                }
+        if currentPrimaryButton == managerButton {
+            do {
+                let person = try Manager(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField.text)
                 
-            } else if currentPrimaryButton == employeeButton {
-                // this is for food services
-                do {
-                    
-                    
-                    
-                } catch let error {
-                    fatalError("\(error)")
-                }
-            }
-        case button2:
-            if currentPrimaryButton == guestButton {
-                //this is for adult
-                print("adult")
-            } else if currentPrimaryButton == employeeButton {
-                // this is for ride services
-                print("ride services")
-            }
-        case button3:
-            if currentPrimaryButton == guestButton {
-                //this is for senior
-                print("senior")
-            } else if currentPrimaryButton == employeeButton {
-                // this is for maintenance
-                print("maintenance")
-            }
-        case button4:
-            if currentPrimaryButton == guestButton {
-                //this is for VIP
-                print("VIP")
-            } else if currentPrimaryButton == employeeButton {
-                // this is for contract workers
-                print("contract")
-            }
-        case button5:
-            if currentPrimaryButton == guestButton {
-                //this is for season pass
-                print("seasonPass")
-            } else if currentPrimaryButton == employeeButton {
-                // this is an error and should return an error
-                print("error")
+                return person
+                
+            } catch invalidInformationError.invalidZipCode {
+                showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+            } catch invalidInformationError.missingCredential(let missingCreds) {
+                showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+            } catch let error {
+                fatalError("\(error)")
             }
             
-        default: //TODO: Throw some error
-            fatalError()
+        } else if currentPrimaryButton == vendorButton {
+            
+            do {
+                let person = try Vendor(firstName: firstNameField.text, lastName: lastNameField.text, vendorCompanyString: companyField.text, dateOfBirth: dateOfBirthField.text, dateOfVisit: dateOfVisitField.text)
+                
+                return person
+                
+            } catch invalidInformationError.invalidDateOfBirth {
+                showAlert(title: "Invalid Date Of Birth", with: "Please enter a valid DOB")
+            } catch invalidInformationError.invalidDateOfVisit {
+                showAlert(title: "Invalid Date Of Visit", with: "Please enter a valid DOV")
+            } catch invalidInformationError.invalidZipCode {
+                showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+            } catch invalidInformationError.missingCredential(let missingCreds) {
+                showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+            } catch let error {
+                fatalError("\(error)")
+            }
+            
+        } else {
+            switch currentSecondaryButton {
+            case button1:
+                if currentPrimaryButton == guestButton {
+                    //this is for child
+                    // If the following field is filled
+                    do {
+                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                        
+                        return person
+                        
+                    } catch invalidInformationError.invalidAge {
+                        showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                    
+                } else if currentPrimaryButton == employeeButton {
+                    // this is for food services
+                    
+                    
+                    do {
+                        let person = try Employee(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField?.text, type: .food)
+                        
+                        return person
+                        
+                    } catch invalidInformationError.missingCredential(let missingCreds) {
+                        showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+                        
+                    } catch invalidInformationError.invalidZipCode {
+                        showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+                        
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                }
+                
+            case button2:
+                if currentPrimaryButton == guestButton {
+                    //this is for adult
+                    let person = Guest(firstName: firstNameField.text, lastName: lastNameField.text, isVIP: false)
+                    
+                    return person
+                    
+                    
+                } else if currentPrimaryButton == employeeButton {
+                    // this is for ride services
+                    
+                    do {
+                        let person = try Employee(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField?.text, type: .ride)
+                        
+                        return person
+                        
+                    } catch invalidInformationError.missingCredential(let missingCreds) {
+                        showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+                        
+                    } catch invalidInformationError.invalidZipCode {
+                        showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+                        
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                }
+                
+            case button3:
+                if currentPrimaryButton == guestButton {
+                    //this is for senior
+                    do {
+                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, age: ageCalculator.calculateAgeFrom(birthDate: dateOfBirthField.text ?? ""))
+                        
+                        return person
+                        
+                    } catch invalidInformationError.invalidAge {
+                        showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                    
+                } else if currentPrimaryButton == employeeButton {
+                    // this is for maintenance
+                    
+                    do {
+                        let person = try Employee(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField?.text, type: .maintenance)
+                        
+                        return person
+                        
+                    } catch invalidInformationError.missingCredential(let missingCreds) {
+                        showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+                        
+                    } catch invalidInformationError.invalidZipCode {
+                        showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+                        
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                }
+                
+            case button4:
+                if currentPrimaryButton == guestButton {
+                    //this is for VIP
+                    
+                    let person = Guest(firstName: firstNameField.text, lastName: lastNameField.text, isVIP: true)
+                    
+                    return person
+                    
+                    
+                } else if currentPrimaryButton == employeeButton {
+                    // this is for contract workers
+                    
+                    do {
+                        let person = try Employee(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField.text, type: .contract, projectNumber: projectNumberField.text)
+                        
+                        return person
+                    } catch invalidInformationError.projectNumberIsNotInt {
+                        showAlert(title: "Invalid Project Number", with: "The project number provided is not a number...")
+                    } catch invalidInformationError.invalidProjectNumber(let projectNumber) {
+                        showAlert(title: "invalid Project Number", with: "\(projectNumber) is not a valid project number...")
+                    } catch invalidInformationError.invalidZipCode {
+                        showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+                    } catch invalidInformationError.missingCredential(let missingCreds) {
+                        showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                }
+                
+            case button5:
+                if currentPrimaryButton == guestButton {
+                    //this is for season pass
+                    
+                    do {
+                        let person = try Guest(firstName: firstNameField.text, lastName: lastNameField.text, streetAddress: streetAddressField.text, city: cityField.text, state: stateField.text, zipCode: zipCodeField.text)
+                        
+                        return person
+                        
+                    } catch invalidInformationError.invalidZipCode {
+                        showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
+                    } catch invalidInformationError.missingCredential(let missingCreds) {
+                        showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
+                    
+                } else if currentPrimaryButton == employeeButton {
+                    // this is an error and should return an error
+                    print("error")
+                }
+            default:
+                showAlert(title: "Select a Type", with: "Please select a type on the top bar to continue")
+            }
         }
+        return nil
     }
 }
 

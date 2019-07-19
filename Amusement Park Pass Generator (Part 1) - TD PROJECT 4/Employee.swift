@@ -9,45 +9,107 @@
 import Foundation
 
 class Employee: Person {
-    
-    var firstName: String
-    var lastName: String
-    var streetAddress: String
-    var city: String
-    var state: String
-    var zipCode: Int
+    var firstName: String?
+    var lastName: String?
+    var streetAddress: String?
+    var city: String?
+    var state: String?
+    var zipCode: Int?
     var type: EmployeeType
+    var personType: PersonType? {
+        return PersonType(rawValue: type.rawValue)
+    }
     var projectNumber: Int?
     
-    init(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int, type: EmployeeType, projectNumber: Int?) throws {
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, type: EmployeeType) throws {
         
-        self.zipCode = zipCode
-        self.type = type
-        
-        if firstName == "" {
+        guard let firstName = firstName, firstName != "" else {
             throw invalidInformationError.missingCredential(missing: "first name")
-        } else if lastName == "" {
-            throw invalidInformationError.missingCredential(missing: "last name")
-        } else if streetAddress == "" {
-            throw invalidInformationError.missingCredential(missing: "street address")
-        } else if city == "" {
-            throw invalidInformationError.missingCredential(missing: "city")
-        } else if state == "" {
-            throw invalidInformationError.missingCredential(missing: "state")
-        } else {
-            self.firstName = firstName
-            self.lastName = lastName
-            self.streetAddress = streetAddress
-            self.city = city
-            self.state = state
         }
         
-        if let projectNumber = projectNumber {
-            if projectNumber == 1001 || projectNumber == 1002 || projectNumber == 1003 || projectNumber == 2001 || projectNumber == 2002 {
-                self.projectNumber = projectNumber
-            } else {
-                throw invalidInformationError.invalidProjectNumber(projectNumber: projectNumber)
-            }
+        guard let lastName = lastName, lastName != "" else {
+            throw invalidInformationError.missingCredential(missing: "last name")
+        }
+        
+        guard let streetAddress = streetAddress, streetAddress != "" else {
+            throw invalidInformationError.missingCredential(missing: "street address")
+        }
+        
+        guard let city = city, city != "" else {
+            throw invalidInformationError.missingCredential(missing: "city")
+        }
+        
+        guard let state = state, state != "" else {
+            throw invalidInformationError.missingCredential(missing: "state")
+        }
+        
+        guard let zipCode = zipCode, zipCode != "" else {
+            throw invalidInformationError.missingCredential(missing: "zip code")
+        }
+        
+        guard let modifiedZipCode = Int(zipCode) else {
+            throw invalidInformationError.invalidZipCode
+        }
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zipCode = modifiedZipCode
+        self.type = type
+    }
+    
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, type: EmployeeType, projectNumber: String?) throws {
+        
+        guard let firstName = firstName, firstName != "" else {
+            throw invalidInformationError.missingCredential(missing: "first name")
+        }
+        
+        guard let lastName = lastName, lastName != "" else {
+            throw invalidInformationError.missingCredential(missing: "last name")
+        }
+        
+        guard let streetAddress = streetAddress, streetAddress != "" else {
+            throw invalidInformationError.missingCredential(missing: "street address")
+        }
+        
+        guard let city = city, city != "" else {
+            throw invalidInformationError.missingCredential(missing: "city")
+        }
+        
+        guard let state = state, state != "" else {
+            throw invalidInformationError.missingCredential(missing: "state")
+        }
+        
+        guard let zipCode = zipCode, zipCode != "" else {
+            throw invalidInformationError.missingCredential(missing: "zip code")
+        }
+        
+        guard let modifiedZipCode = Int(zipCode) else {
+            throw invalidInformationError.invalidZipCode
+        }
+        
+        guard let projectNumber = projectNumber, projectNumber != "" else {
+            throw invalidInformationError.missingCredential(missing: "project number")
+        }
+        
+        guard let modifiedProjectNumber = Int(projectNumber) else {
+            throw invalidInformationError.projectNumberIsNotInt
+        }
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zipCode = modifiedZipCode
+        self.type = type
+        
+        if modifiedProjectNumber == 1001 || modifiedProjectNumber == 1002 || modifiedProjectNumber == 1003 || modifiedProjectNumber == 2001 || modifiedProjectNumber == 2002 {
+            self.projectNumber = modifiedProjectNumber
+        } else {
+            throw invalidInformationError.invalidProjectNumber(projectNumber: modifiedProjectNumber)
         }
     }
     
@@ -100,7 +162,7 @@ class Employee: Person {
     }
 }
 
-enum EmployeeType {
+enum EmployeeType: String {
     case food
     case ride
     case maintenance

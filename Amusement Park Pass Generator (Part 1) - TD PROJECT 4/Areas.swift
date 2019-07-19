@@ -9,7 +9,7 @@
 import Foundation
 
 // the different areas around the park that different people can have access to
-enum Areas {
+enum Areas: String {
     case amusementAreas
     case kitchenAreas
     case rideControlAreas

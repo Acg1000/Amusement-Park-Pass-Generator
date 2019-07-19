@@ -17,19 +17,15 @@ class Guest: Person {
     var state: String?
     var zipCode: Int?
     var type: GuestType
+    var personType: PersonType? {
+        return PersonType(rawValue: type.rawValue)
+    }
     
     
     // Init for Classic and VIPs
-    init(firstName: String?, lastName: String?, isVIP: Bool) throws {
+    init(firstName: String?, lastName: String?, isVIP: Bool) {
         
-        guard let firstName = firstName else {
-            throw invalidInformationError.missingCredential(missing: "first name")
-        }
         self.firstName = firstName
-        
-        guard let lastName = lastName else {
-            throw invalidInformationError.missingCredential(missing: "last name")
-        }
         self.lastName = lastName
         
         if isVIP {
@@ -42,14 +38,8 @@ class Guest: Person {
     // Child and senior init method
     init(firstName: String?, lastName: String?, age: Int?) throws {
         
-        guard let firstName = firstName else {
-            throw invalidInformationError.missingCredential(missing: "first name")
-        }
         self.firstName = firstName
         
-        guard let lastName = lastName else {
-            throw invalidInformationError.missingCredential(missing: "last name")
-        }
         self.lastName = lastName
         
         guard let age = age else {
@@ -68,14 +58,43 @@ class Guest: Person {
     }
     
     // Season Pass Guest
-    init(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int) {
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?) throws {
+        
+        guard let firstName = firstName, firstName != "" else {
+            throw invalidInformationError.missingCredential(missing: "first name")
+        }
+        
+        guard let lastName = lastName, lastName != "" else {
+            throw invalidInformationError.missingCredential(missing: "last name")
+        }
+        
+        guard let streetAddress = streetAddress, streetAddress != "" else {
+            throw invalidInformationError.missingCredential(missing: "street address")
+        }
+        
+        guard let city = city, city != "" else {
+            throw invalidInformationError.missingCredential(missing: "city")
+        }
+        
+        guard let state = state, state != "" else {
+            throw invalidInformationError.missingCredential(missing: "state")
+        }
+        
+        guard let zipCode = zipCode, zipCode != "" else {
+            throw invalidInformationError.missingCredential(missing: "zip code")
+        }
+        
+        guard let modifiedZipCode = Int(zipCode) else {
+            throw invalidInformationError.invalidZipCode
+        }
+        
         
         self.firstName = firstName
         self.lastName = lastName
         self.streetAddress = streetAddress
         self.city = city
         self.state = state
-        self.zipCode = zipCode
+        self.zipCode = modifiedZipCode
         self.type = .seasonPass
     }
     
@@ -123,7 +142,7 @@ class Guest: Person {
     }
 }
 
-enum GuestType {
+enum GuestType: String {
     case classic
     case vip
     case freeChild

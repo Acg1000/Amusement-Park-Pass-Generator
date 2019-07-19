@@ -12,4 +12,9 @@ enum invalidInformationError: Error {
     case missingCredential(missing: String)
     case invalidAge
     case invalidProjectNumber(projectNumber: Int)
+    case projectNumberIsNotInt
+    case invalidZipCode
+    case invalidVendorCompany
+    case invalidDateOfBirth
+    case invalidDateOfVisit
 }

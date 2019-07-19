@@ -9,34 +9,50 @@
 import Foundation
 
 class Manager: Person {
-    var firstName: String
-    var lastName: String
+    var firstName: String?
+    var lastName: String?
     var streetAddress: String
     var city: String
     var state: String
     var zipCode: Int
+    let personType: PersonType? = .manager
     
-    init(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: Int ) throws {
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String? ) throws {
         
-        self.zipCode = zipCode
-        
-        if firstName == "" {
+        guard let firstName = firstName, firstName != "" else {
             throw invalidInformationError.missingCredential(missing: "first name")
-        } else if lastName == "" {
-            throw invalidInformationError.missingCredential(missing: "last name")
-        } else if streetAddress == "" {
-            throw invalidInformationError.missingCredential(missing: "street address")
-        } else if city == "" {
-            throw invalidInformationError.missingCredential(missing: "city")
-        } else if state == "" {
-            throw invalidInformationError.missingCredential(missing: "state")
-        } else {
-            self.firstName = firstName
-            self.lastName = lastName
-            self.streetAddress = streetAddress
-            self.city = city
-            self.state = state
         }
+        
+        guard let lastName = lastName, lastName != "" else {
+            throw invalidInformationError.missingCredential(missing: "last name")
+        }
+        
+        guard let streetAddress = streetAddress, streetAddress != "" else {
+            throw invalidInformationError.missingCredential(missing: "street address")
+        }
+        
+        guard let city = city, city != "" else {
+            throw invalidInformationError.missingCredential(missing: "city")
+        }
+        
+        guard let state = state, state != "" else {
+            throw invalidInformationError.missingCredential(missing: "state")
+        }
+        
+        guard let zipCode = zipCode, zipCode != "" else {
+            throw invalidInformationError.missingCredential(missing: "zip code")
+        }
+        
+        guard let modifiedZipCode = Int(zipCode) else {
+            throw invalidInformationError.invalidZipCode
+        }
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zipCode = modifiedZipCode
     }
     
     // approperate types need to access their designated areas

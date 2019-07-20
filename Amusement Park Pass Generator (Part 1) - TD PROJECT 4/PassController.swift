@@ -122,14 +122,18 @@ class PassController: UIViewController {
     @IBAction func rideAccessButton(_ sender: Any) {
         resetTestResultsLabel()
         
-        let rideSwipe = person?.rideSwipe()
-        if let canSkip = rideSwipe?.canSkip, canSkip {
-            testResultsLabel.backgroundColor  = .green
-            testResultsLabel.text = "CAN SKIP"
+        guard let person = person else {
+            return
         }
         
-        testResultsLabel.backgroundColor  = .red
-        testResultsLabel.text = "CAN NOT SKIP"
+        let canSkip = person.rideSwipe().canSkip
+        if canSkip {
+            testResultsLabel.backgroundColor  = .green
+            testResultsLabel.text = "CAN SKIP"
+        } else {
+            testResultsLabel.backgroundColor  = .red
+            testResultsLabel.text = "CAN NOT SKIP"
+        }
         
     }
     

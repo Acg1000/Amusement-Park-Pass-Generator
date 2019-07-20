@@ -63,7 +63,8 @@ class PassController: UIViewController {
         
         // checks to see if the person has a type
         guard let personType = person.personType else {
-            fatalError("no person type")
+            showAlert(title: "Missing Person Type", with: "There is no person type included in the pass")
+            return
         }
         
         // add the type to a label
@@ -102,6 +103,15 @@ class PassController: UIViewController {
 
     }
     
+    func showAlert(title: String, with message: String?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     // Tests their area access and then changes the label to reflect it
     @IBAction func areaAccessButton(_ sender: Any) {
         resetTestResultsLabel()
@@ -109,7 +119,8 @@ class PassController: UIViewController {
         let areaSwipe = person?.areaSwipe()
         guard let areas = areaSwipe?.areas else {
             // this will never happen
-            fatalError()
+            showAlert(title: "Oops...", with: "We have encountered an unexpected error...")
+            return
         }
         
         for area in areas {

@@ -14,12 +14,12 @@ class DateCalculator {
     let formatter = DateFormatter()    
     
     // given a formatted string that represents a date, it calculates your age
-    func calculateAgeFrom(birthDate dateString: String) -> Int {
+    func calculateAgeFrom(birthDate dateString: String) throws -> Int {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         guard let dateFromString = dateFormatter.date(from: dateString) else {
-           fatalError()
+           throw invalidInformationError.invalidDateOfBirth
         }
         
         return Calendar.current.dateComponents([.year], from: dateFromString, to: Date()).year!

@@ -396,7 +396,7 @@ class ViewController: UIViewController {
             } catch invalidInformationError.missingCredential(let missingCreds) {
                 showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
             } catch let error {
-                fatalError("\(error)")
+                showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
             }
             
             // If its a vendor
@@ -426,7 +426,7 @@ class ViewController: UIViewController {
                 }
                 
             } catch let error {
-                fatalError("\(error)")
+                showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
             }
             
         } else {
@@ -442,12 +442,16 @@ class ViewController: UIViewController {
                         // return the child
                         return person
                         
+                    } catch invalidInformationError.invalidDateOfBirth {
+                        showAlert(title: "Invalid Date Of Birth", with: "Please enter a valid DOB")
+                    } catch invalidInformationError.invalidDateOfVisit {
+                        showAlert(title: "Invalid Date Of Visit", with: "Please enter a valid DOV")
                     } catch invalidInformationError.invalidAge {
                         showAlert(title: "Invalid Age", with: "You are too old to obtain the free child pass...")
                     } catch invalidInformationError.missingCredential(let missing) {
                         showAlert(title: "Missing First Name", with: "Please either enter a valid \(missing)")
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                     
                 } else if currentPrimaryButton == employeeButton {
@@ -465,7 +469,7 @@ class ViewController: UIViewController {
                         showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
                         
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                 }
                 
@@ -493,7 +497,7 @@ class ViewController: UIViewController {
                         showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
                         
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                 }
                 
@@ -505,10 +509,14 @@ class ViewController: UIViewController {
                         
                         return person
                         
+                    } catch invalidInformationError.invalidDateOfBirth {
+                        showAlert(title: "Invalid Date Of Birth", with: "Please enter a valid DOB")
+                    } catch invalidInformationError.invalidDateOfVisit {
+                        showAlert(title: "Invalid Date Of Visit", with: "Please enter a valid DOV")
                     } catch invalidInformationError.invalidAge {
                         showAlert(title: "Invalid Age", with: "You are too young to obtain the senior pass...")
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                     
                 } else if currentPrimaryButton == employeeButton {
@@ -526,7 +534,7 @@ class ViewController: UIViewController {
                         showAlert(title: "Invalid Zipcode", with: "Please enter a zip code that only consists of numbers")
                         
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                 }
                 
@@ -555,7 +563,7 @@ class ViewController: UIViewController {
                     } catch invalidInformationError.missingCredential(let missingCreds) {
                         showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                 }
                 
@@ -573,12 +581,9 @@ class ViewController: UIViewController {
                     } catch invalidInformationError.missingCredential(let missingCreds) {
                         showAlert(title: "Missing Credentials", with: "It looks like you forgot to input any information for your \(missingCreds)" )
                     } catch let error {
-                        fatalError("\(error)")
+                        showAlert(title: "Oops...", with: "We have encountered an unexpected error... \(error)")
                     }
                     
-                } else if currentPrimaryButton == employeeButton {
-                    // this is an error and should return an error
-                    print("error")
                 }
             default:
                 // If nothing is selected then an alert tells you to select a seconday button

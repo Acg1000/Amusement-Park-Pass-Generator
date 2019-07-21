@@ -50,7 +50,6 @@ extension UIFont {
 
 
 class ViewController: UIViewController {
-    let swipe = Swipe()
     let dateCalculator = DateCalculator()
     
     // Top level buttons
@@ -127,12 +126,6 @@ class ViewController: UIViewController {
         disableFields()
 
         // Do any additional setup after loading the view.
-        var employee: Employee?
-        let employeeFailure: Employee?
-        var guest: Guest?
-        let guestFailure: Guest?
-        var manager: Manager?
-        
         // Starts it off by pressing the guest button
         guestPressed("me")
     }

@@ -19,27 +19,27 @@ class Manager: Person {
     
     init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String? ) throws {
         
-        guard let firstName = firstName, firstName != "" else {
+        guard let firstName = firstName, firstName.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
         
-        guard let lastName = lastName, lastName != "" else {
+        guard let lastName = lastName, lastName.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "last name")
         }
         
-        guard let streetAddress = streetAddress, streetAddress != "" else {
+        guard let streetAddress = streetAddress, streetAddress.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "street address")
         }
         
-        guard let city = city, city != "" else {
+        guard let city = city, city.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "city")
         }
         
-        guard let state = state, state != "" else {
+        guard let state = state, state.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "state")
         }
         
-        guard let zipCode = zipCode, zipCode != "" else {
+        guard let zipCode = zipCode, zipCode.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "zip code")
         }
         

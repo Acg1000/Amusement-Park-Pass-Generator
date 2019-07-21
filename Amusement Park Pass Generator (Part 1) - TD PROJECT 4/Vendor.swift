@@ -18,23 +18,23 @@ class Vendor: Person {
     
     init(firstName: String?, lastName: String?, vendorCompanyString: String?, dateOfBirth: String?, dateOfVisit: String?) throws {
         
-        guard let firstName = firstName, firstName != "" else {
+        guard let firstName = firstName, firstName.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "first name")
         }
         
-        guard let lastName = lastName, lastName != "" else {
+        guard let lastName = lastName, lastName.isEmpty else {
             throw invalidInformationError.missingCredential(missing: "last name")
         }
         
-        guard let vendorCompanyString = vendorCompanyString, vendorCompanyString != "" else {
+        guard let vendorCompanyString = vendorCompanyString, vendorCompanyString.isEmpty else {
             throw invalidInformationError.invalidVendorCompany(name: nil)
         }
         
-        guard let dateOfBirth = dateOfBirth, dateOfBirth != "" else {
+        guard let dateOfBirth = dateOfBirth, dateOfBirth.isEmpty else {
             throw invalidInformationError.invalidDateOfBirth
         }
         
-        guard let dateOfVisit = dateOfVisit, dateOfVisit != ""  else {
+        guard let dateOfVisit = dateOfVisit, dateOfVisit.isEmpty else {
             throw invalidInformationError.invalidDateOfVisit
         }
         
